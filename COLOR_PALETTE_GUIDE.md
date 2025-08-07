@@ -178,6 +178,12 @@ If colors aren't updating:
 3. Check the browser console for any errors
 4. Verify your hex color codes are valid (6 characters, with or without #)
 
+## 📚 Related Documentation
+
+- [Galaxy Architecture Guide](./GALAXY_ARCHITECTURE_GUIDE.md) - Comprehensive guide on building Core vs Feature apps
+- [Galaxy Configuration Guide](./GALAXY_CONFIGURATION.md) - Detailed configuration options
+- [README](./README.md) - Project overview and quick start
+
 ---
 
 Now you have complete control over your application's color scheme! 🎨

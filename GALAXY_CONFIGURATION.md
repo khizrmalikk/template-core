@@ -1,5 +1,7 @@
 # 🌌 Galaxy Configuration Guide
 
+This guide focuses on configuring the `galaxy.config.ts` file. For a comprehensive guide on building and integrating Core vs Feature apps, see the [Galaxy Architecture Guide](./GALAXY_ARCHITECTURE_GUIDE.md).
+
 This template adapts its behavior based on the `type` field in `galaxy.config.ts`. Here's how to configure it for different use cases.
 
 ## 🎯 Core App Configuration
@@ -15,7 +17,19 @@ export const galaxyConfig: GalaxyConfig = {
   tagline: 'Central hub for all your tools',
   description: 'Manage and orchestrate all your features from one place',
   coreAppUrl: 'https://my-galaxy.com',
-  primaryColor: '#3B82F6',
+  
+  // Theme configuration
+  colorPalette: {
+    primary: '#3B82F6',
+    secondary: '#8B5CF6',
+    accent: '#F59E0B',
+    background: '#FFFFFF',
+    foreground: '#1F2937',
+    muted: '#9CA3AF',
+    success: '#10B981',
+    warning: '#F59E0B',
+    error: '#EF4444',
+  },
   
   // Features to promote in the sidebar
   promoteFeatures: ['feature-1', 'feature-2'],
@@ -65,7 +79,18 @@ export const galaxyConfig: GalaxyConfig = {
   // This feature's API endpoint
   apiEndpoint: 'https://my-feature.com/api/feature',
   
-  primaryColor: '#10B981',  // Different color for each feature
+  // Theme configuration - can match core or be unique
+  colorPalette: {
+    primary: '#10B981',      // Can have different branding
+    secondary: '#8B5CF6',
+    accent: '#F59E0B',
+    background: '#FFFFFF',
+    foreground: '#1F2937',
+    muted: '#9CA3AF',
+    success: '#10B981',
+    warning: '#F59E0B',
+    error: '#EF4444',
+  },
   
   // Sibling features this can integrate with
   related: [
@@ -180,6 +205,12 @@ FEATURE_API_KEY="your-api-key"
 3. **Version your configurations** when making changes
 4. **Test API endpoints** before adding to config
 5. **Document each feature's purpose** in the description
+
+## 📚 Related Documentation
+
+- [Galaxy Architecture Guide](./GALAXY_ARCHITECTURE_GUIDE.md) - Comprehensive guide on building Core vs Feature apps
+- [Color Palette Guide](./COLOR_PALETTE_GUIDE.md) - Theme system and color configuration
+- [README](./README.md) - Project overview and quick start
 
 ---
 

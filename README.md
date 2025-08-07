@@ -12,6 +12,8 @@ Template Core is the foundation for building a "galaxy system" of interconnected
 - **Unified Dashboard**: Central hub for all user activity
 - **Composable Architecture**: Each app can work independently or together
 
+> **📚 New to the Galaxy System?** Check out our [Galaxy Architecture Guide](./GALAXY_ARCHITECTURE_GUIDE.md) for a comprehensive walkthrough on building Core vs Feature apps!
+
 ## 🎯 Philosophy
 
 Instead of building monolithic applications, the galaxy system promotes:
@@ -57,6 +59,8 @@ template-core/
 ├── public/                      # Static assets
 ├── env.template                 # Environment variables template
 ├── COLOR_PALETTE_GUIDE.md       # Theme system documentation
+├── GALAXY_ARCHITECTURE_GUIDE.md # Core vs Feature setup guide
+├── CLI_DEVELOPMENT_GUIDE.md     # CLI tool development guide
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -70,6 +74,8 @@ template-core/
 
 ## 🔧 Setup Instructions
 
+> **🚀 Want to create new Galaxy apps quickly?** Check out our [CLI Development Guide](./CLI_DEVELOPMENT_GUIDE.md) to build a CLI tool that scaffolds projects in seconds!
+
 ### 1. Clone and Install
 
 ```bash
@@ -79,6 +85,9 @@ cd template-core
 
 # Install dependencies
 npm install
+
+# Or use the Galaxy CLI (once built)
+npx create-galaxy-app my-app
 ```
 
 ### 2. Environment Setup
@@ -262,7 +271,9 @@ const results = await batchCallFeatureAPIs([
 
 ## 🌌 Building Your Galaxy
 
-### Creating a New Planet (Feature App)
+> **📖 For a comprehensive guide on building Core vs Feature apps, see [GALAXY_ARCHITECTURE_GUIDE.md](./GALAXY_ARCHITECTURE_GUIDE.md)**
+
+### Quick Start: Creating a New Planet (Feature App)
 
 1. Clone this template for your feature app
 2. Update `galaxy.config.ts` with `type: 'feature'`
@@ -270,12 +281,14 @@ const results = await batchCallFeatureAPIs([
 4. Deploy independently
 5. Add to core's `related` features
 
-### Adding Features to Core
+### Quick Start: Adding Features to Core
 
 1. Edit `galaxy.config.ts`
 2. Add to `related` array
 3. Add to `promoteFeatures` if it should be highlighted
 4. The UI will automatically update
+
+For detailed setup instructions, API integration patterns, and best practices, refer to the [Galaxy Architecture Guide](./GALAXY_ARCHITECTURE_GUIDE.md).
 
 ## 📝 Configuration Types
 
