@@ -26,11 +26,12 @@ Instead of building monolithic applications, the galaxy system promotes:
 
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
-- **Styling**: TailwindCSS
+- **Styling**: TailwindCSS v3 with CSS Variables
 - **UI Components**: ShadCN UI
 - **Authentication**: Clerk
 - **Analytics**: PostHog (optional)
 - **Icons**: Lucide React
+- **Theming**: Dynamic color system with ThemeProvider
 
 ## 📁 Project Structure
 
@@ -44,19 +45,28 @@ template-core/
 │   │   └── layout.tsx           # Global layout with Clerk
 │   ├── components/
 │   │   ├── ui/                  # ShadCN UI components
-│   │   └── sidebar.tsx          # Navigation sidebar
+│   │   ├── sidebar.tsx          # Navigation sidebar
+│   │   └── theme-provider.tsx   # Dynamic theme system
 │   ├── config/
 │   │   └── galaxy.config.ts     # Core configuration file
 │   ├── lib/
 │   │   ├── fetchers.ts          # API helper functions
+│   │   ├── galaxy-utils.ts      # Galaxy configuration utilities
 │   │   └── utils.ts             # Utility functions
 │   └── middleware.ts            # Clerk auth middleware
 ├── public/                      # Static assets
 ├── env.template                 # Environment variables template
+├── COLOR_PALETTE_GUIDE.md       # Theme system documentation
 ├── package.json
 ├── tsconfig.json
 └── README.md
 ```
+
+## 📋 Requirements
+
+- Node.js 18.18.0 or higher (v20+ recommended)
+- npm or yarn package manager
+- Git
 
 ## 🔧 Setup Instructions
 
@@ -96,7 +106,17 @@ export const galaxyConfig: GalaxyConfig = {
   tagline: 'Your compelling tagline',
   description: 'Detailed description',
   coreAppUrl: 'https://your-app.com',
-  primaryColor: '#3B82F6',
+  colorPalette: {
+    primary: '#3B8247',      // Main brand color
+    secondary: '#82673B',    // Supporting actions
+    accent: '#F59E0B',       // Highlights and CTAs
+    background: '#353f50',   // Page background
+    foreground: '#fffdee',   // Text color
+    muted: '#9CA3AF',        // Muted elements
+    success: '#10B981',      // Success states
+    warning: '#F59E0B',      // Warning states
+    error: '#EF4444',        // Error states
+  },
   promoteFeatures: ['feature-1', 'feature-2'],
   related: [
     {
@@ -124,10 +144,15 @@ Visit [http://localhost:3000](http://localhost:3000) to see your app.
 - Protected dashboard routes
 - User management via `UserButton` component
 
-### 🎨 Dynamic Branding
-- All branding loaded from `galaxy.config.ts`
-- Consistent theming across the app
+### 🎨 Advanced Theme System
+- Full color palette support with 9 customizable colors
+- Dynamic CSS variable injection via ThemeProvider
+- Automatic contrast calculation for text on colored backgrounds
+- All colors loaded from `galaxy.config.ts`
+- Consistent theming across the entire application
+- Theme-aware UI components (buttons, cards, alerts)
 - Easy to rebrand for different projects
+- See `COLOR_PALETTE_GUIDE.md` for detailed documentation
 
 ### 🔗 Feature Integration
 - Call external APIs using `callFeatureAPI()`
@@ -144,6 +169,59 @@ Visit [http://localhost:3000](http://localhost:3000) to see your app.
 - Sidebar with promoted features
 - External links to planet apps
 - Clean, organized navigation structure
+
+## 🎨 Theme System
+
+### How It Works
+
+The template includes a powerful theme system that dynamically applies your brand colors throughout the application:
+
+1. **Color Configuration**: Define your color palette in `galaxy.config.ts`
+2. **ThemeProvider**: Automatically converts and applies colors as CSS variables
+3. **Tailwind Integration**: Use theme colors with Tailwind classes like `bg-primary`, `text-secondary`
+4. **Smart Contrast**: Automatically calculates readable text colors for backgrounds
+
+### Using Theme Colors
+
+```jsx
+// In your components
+<div className="bg-primary text-primary-foreground">
+  Primary colored section with readable text
+</div>
+
+<button className="bg-accent hover:bg-accent/90">
+  Accent button
+</button>
+
+<div className="bg-background text-foreground">
+  Main content area
+</div>
+```
+
+### Available Color Classes
+
+- `primary` / `primary-foreground` - Main brand color
+- `secondary` / `secondary-foreground` - Supporting elements
+- `accent` / `accent-foreground` - CTAs and highlights
+- `background` / `foreground` - Page and text colors
+- `muted` / `muted-foreground` - Subtle elements
+- `card` / `card-foreground` - Card backgrounds
+- `destructive` / `destructive-foreground` - Error states
+
+### Customizing Colors
+
+Simply update the `colorPalette` in `galaxy.config.ts` and the entire app will reflect your new colors instantly:
+
+```typescript
+colorPalette: {
+  primary: '#YourColor',     // Your main brand color
+  secondary: '#YourColor',   // Supporting color
+  accent: '#YourColor',      // Highlight color
+  background: '#YourColor',  // Page background
+  foreground: '#YourColor',  // Text color
+  // ... more colors
+}
+```
 
 ## 🛠️ API Integration
 
@@ -210,10 +288,23 @@ export interface GalaxyConfig {
   description?: string;        // Long description
   coreAppUrl?: string;         // Link to core app
   apiEndpoint?: string;        // API endpoint for this app
-  primaryColor?: string;       // Brand color
+  primaryColor?: string;       // Legacy: single brand color
+  colorPalette?: ColorPalette; // New: full theme colors
   promoteCore?: boolean;       // Should features promote core?
   promoteFeatures?: string[];  // Features to highlight
   related?: RelatedFeature[];  // Connected features
+}
+
+export interface ColorPalette {
+  primary: string;             // Main brand color
+  secondary: string;           // Supporting actions
+  accent: string;              // Highlights and CTAs
+  background: string;          // Page backgrounds
+  foreground: string;          // Main text color
+  muted: string;               // Muted text/elements
+  success: string;             // Success states
+  warning: string;             // Warning states
+  error: string;               // Error states
 }
 ```
 
@@ -252,6 +343,23 @@ npm update
 # Update specific package
 npm install package@latest
 ```
+
+## 📝 Recent Updates
+
+### v1.1.0 - Theme System Enhancement
+- ✨ **New Color Palette System**: Replaced single `primaryColor` with full `colorPalette` supporting 9 customizable colors
+- 🎨 **ThemeProvider Component**: Dynamic CSS variable injection for real-time theme updates
+- 🔧 **Tailwind v3 Migration**: Migrated from Tailwind v4 alpha to stable v3 for better compatibility
+- 📚 **Theme Documentation**: Added comprehensive COLOR_PALETTE_GUIDE.md
+- 🎯 **Smart Contrast**: Automatic foreground color calculation for optimal readability
+- 🚀 **Performance**: Optimized theme application with useEffect hooks
+
+### v1.0.0 - Initial Release
+- 🏗️ Next.js 15 with App Router
+- 🔐 Clerk authentication integration
+- 🌌 Galaxy system architecture
+- 📊 Beautiful dashboard UI
+- 🔗 Feature API integration system
 
 ## 🤝 Contributing
 

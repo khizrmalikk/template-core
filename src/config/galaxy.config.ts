@@ -45,15 +45,15 @@ export const galaxyConfig: GalaxyConfig = {
   
   // Color palette - customize these to match your brand
   colorPalette: {
-    primary: '#d83f30',      // Teal - main brand color
-    secondary: '#d9d4d0',    // Purple - supporting actions
-    accent: '#F59E0B',       // Amber - highlights and CTAs
-    background: '#353f50',   // White background
-    foreground: '#fffdee',   // Dark gray text
-    muted: '#9CA3AF',        // Gray for muted elements
-    success: '#10B981',      // Green for success
-    warning: '#F59E0B',      // Orange for warnings
-    error: '#EF4444',        // Red for errors
+    "primary": "#7F00FF",      // Cosmic purple - main brand color
+    "secondary": "#0F172A",    // Deep space navy - for headers and UI blocks
+    "accent": "#FF5F9E",       // Nebula pink - highlights and CTAs
+    "background": "#0B0C10",   // Near-black space background
+    "foreground": "#E5E7EB",   // Starlight white/gray text
+    "muted": "#64748B",        // Muted galaxy gray-blue
+    "success": "#34D399",      // Aurora green - for positive actions
+    "warning": "#FBBF24",      // Supernova gold - for warnings
+    "error": "#EF4444"         // Solar flare red - for errors
   },
   
   promoteFeatures: ['cv-gen', 'cover-letter'],
